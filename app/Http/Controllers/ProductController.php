@@ -23,7 +23,7 @@ class ProductController extends Controller
             ]
         ], 200);
     }
-    public function getProductByGame($gameId)
+    public function getProductsByGame($gameId)
     {
         $products = Product::where('game_id' , $gameId)->get();
         if (!$products) {
@@ -35,7 +35,7 @@ class ProductController extends Controller
         return response()->json([
             "status" => "success",
             'data' => [
-                'product' => $products
+                'products' => $products
             ]
         ], 200);
     }
