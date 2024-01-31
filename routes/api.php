@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\AgentController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\GameController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -44,3 +47,47 @@ Route::group([
 });
 
 ############################# End Category Routes #############################
+
+############################# Start Games Routes #############################
+
+Route::group([
+    'prefix' => 'game'
+], function () {
+    Route::get('', [GameController::class, 'index']);
+    Route::get('{gameId}', [GameController::class, 'getGame']);
+    Route::get('gamesByCategory?cat_id={categoryId}', [GameController::class, 'getGamesByCategory']);
+    Route::post('create', [GameController::class, 'store']);
+    Route::patch('update', [GameController::class, 'update']);
+    Route::delete('delete', [GameController::class, 'delete']);
+});
+
+############################# End Games Routes #############################
+
+############################# Start Product Routes #############################
+
+Route::group([
+    'prefix' => 'product'
+], function () {
+    Route::get('', [ProductController::class, 'index']);
+    Route::get('{productId}', [ProductController::class, 'getProduct']);
+    Route::get('productsByGame?game_id={gameId}', [ProductController::class, 'getGamesByGame']);
+    Route::post('create', [ProductController::class, 'store']);
+    Route::patch('update', [ProductController::class, 'update']);
+    Route::delete('delete', [ProductController::class, 'delete']);
+});
+
+############################# End Product Routes #############################
+
+############################# Start Agent Routes #############################
+
+Route::group([
+    'prefix' => 'agent'
+], function () {
+    Route::get('', [AgentController::class, 'index']);
+    Route::get('{gameId}', [AgentController::class, 'getAgent']);
+    Route::post('create', [AgentController::class, 'store']);
+    Route::patch('update', [AgentController::class, 'update']);
+    Route::delete('delete', [AgentController::class, 'delete']);
+});
+
+############################# End Agent Routes #############################
