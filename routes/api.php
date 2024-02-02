@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +34,19 @@ Route::group([
 });
 
 ############################# End Auth Routes #############################
+
+############################# Start User Routes #############################
+
+Route::group([
+    'prefix' => 'user'
+], function () {
+    Route::get('', [UserController::class, 'index']);
+    Route::get('getUser', [UserController::class, 'getUser']);
+    Route::patch('update', [UserController::class, 'update']);
+    Route::delete('delete', [UserController::class, 'delete']);
+});
+
+############################# End User Routes #############################
 
 ############################# Start Category Routes #############################
 
