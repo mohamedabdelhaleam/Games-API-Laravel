@@ -24,7 +24,24 @@ class UserController extends Controller
             ]
         ], 200);
     }
-    public function update(Request $request, $userId)
+    public function getUser()
+    {
+        $userId = Auth::user()->id;
+        $user = User::find($userId);
+        if (!$user) {
+            return response()->json([
+                "status" => "fail",
+                "message" => "The requested resource was not found. Please check the provided identifier or ensure the resource exists."
+            ], 404);
+        }
+        return response()->json([
+            "status" => "success",
+            'data' => [
+                'user' => $user
+            ]
+        ], 200);
+    }
+    public function update(Request $request)
     {
         $userId = Auth::user()->id;
         $user = User::find($userId);
@@ -43,7 +60,7 @@ class UserController extends Controller
             ]
         ], 200);
     }
-    public function delete($userId)
+    public function delete()
     {
         $userId = Auth::user()->id;
         $user = User::find($userId);
