@@ -4,6 +4,7 @@ use App\Http\Controllers\AgentController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -65,7 +66,7 @@ Route::group([
 ############################# Start Games Routes #############################
 
 Route::group([
-    'prefix' => 'game'
+    'prefix' => 'games'
 ], function () {
     Route::get('', [GameController::class, 'index']);
     Route::get('{gameId}', [GameController::class, 'getGame']);
@@ -98,10 +99,24 @@ Route::group([
     'prefix' => 'agent'
 ], function () {
     Route::get('', [AgentController::class, 'index']);
-    Route::get('{gameId}', [AgentController::class, 'getAgent']);
+    Route::get('{agentId}', [AgentController::class, 'getAgent']);
     Route::post('create', [AgentController::class, 'store']);
-    Route::patch('update', [AgentController::class, 'update']);
-    Route::delete('delete', [AgentController::class, 'delete']);
+    Route::patch('update/{agentId}', [AgentController::class, 'update']);
+    Route::delete('delete/{agentId}', [AgentController::class, 'delete']);
 });
 
 ############################# End Agent Routes #############################
+
+############################# Start Order Routes #############################
+
+Route::group([
+    'prefix' => 'order'
+], function () {
+    Route::get('', [OrderController::class, 'index']);
+    Route::get('getOrder', [OrderController::class, 'getUserOrder']);
+    Route::post('create', [OrderController::class, 'create']);
+    Route::patch('update/{orderId}', [OrderController::class, 'update']);
+    Route::delete('delete/{orderId}', [OrderController::class, 'delete']);
+});
+
+############################# End Order Routes #############################
