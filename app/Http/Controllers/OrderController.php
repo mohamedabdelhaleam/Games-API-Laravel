@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -71,7 +72,12 @@ class OrderController extends Controller
     }
     public function accept($orderId)
     {
-        $order = Order::find($orderId);
+        $userId = Auth::user()->id;
+        $user = User::find($userId);
+        $order = Order::with('product')->find($orderId);
+        $user->update([
+            "balance" => ($user->balance) - ($order->product->price),
+        ]);
         if (!$order) {
             return response()->json([
                 "status" => "fail",
