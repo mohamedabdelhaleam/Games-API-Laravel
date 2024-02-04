@@ -56,9 +56,6 @@ Route::group([
 ], function () {
     Route::get('', [CategoryController::class, 'index']);
     Route::get('{categoryId}', [CategoryController::class, 'getCategory']);
-    Route::post('create', [CategoryController::class, 'store']);
-    Route::patch('update', [CategoryController::class, 'update']);
-    Route::delete('delete', [CategoryController::class, 'delete']);
 });
 
 ############################# End Category Routes #############################
@@ -68,12 +65,10 @@ Route::group([
 Route::group([
     'prefix' => 'games'
 ], function () {
+
     Route::get('', [GameController::class, 'index']);
     Route::get('{gameId}', [GameController::class, 'getGame']);
     Route::get('gamesByCategory?cat_id={categoryId}', [GameController::class, 'getGamesByCategory']);
-    Route::post('create', [GameController::class, 'store']);
-    Route::patch('update', [GameController::class, 'update']);
-    Route::delete('delete', [GameController::class, 'delete']);
 });
 
 ############################# End Games Routes #############################
@@ -83,12 +78,10 @@ Route::group([
 Route::group([
     'prefix' => 'product'
 ], function () {
+
     Route::get('', [ProductController::class, 'index']);
     Route::get('{productId}', [ProductController::class, 'getProduct']);
     Route::get('productsByGame?game_id={gameId}', [ProductController::class, 'getGamesByGame']);
-    Route::post('create', [ProductController::class, 'store']);
-    Route::patch('update', [ProductController::class, 'update']);
-    Route::delete('delete', [ProductController::class, 'delete']);
 });
 
 ############################# End Product Routes #############################
@@ -98,11 +91,9 @@ Route::group([
 Route::group([
     'prefix' => 'agent'
 ], function () {
+
     Route::get('', [AgentController::class, 'index']);
     Route::get('{agentId}', [AgentController::class, 'getAgent']);
-    Route::post('create', [AgentController::class, 'store']);
-    Route::patch('update/{agentId}', [AgentController::class, 'update']);
-    Route::delete('delete/{agentId}', [AgentController::class, 'delete']);
 });
 
 ############################# End Agent Routes #############################
@@ -112,11 +103,10 @@ Route::group([
 Route::group([
     'prefix' => 'order'
 ], function () {
+
     Route::get('', [OrderController::class, 'index']);
     Route::get('getOrder', [OrderController::class, 'getUserOrder']);
     Route::post('create', [OrderController::class, 'create']);
-    Route::patch('update/{orderId}', [OrderController::class, 'update']);
-    Route::delete('delete/{orderId}', [OrderController::class, 'delete']);
 });
 
 ############################# End Order Routes #############################
