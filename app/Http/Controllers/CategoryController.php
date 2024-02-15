@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Traits\GamesTrait;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    use GamesTrait;
     public function index()
     {
         $categories = Category::all();
@@ -41,9 +43,10 @@ class CategoryController extends Controller
     }
     public function store(Request $request)
     {
+        $file_name = $this->saveImage($request->photo, 'images/category');
         $category = Category::create([
             'name' => $request->name,
-            'image' => $request->image
+            'image' => $file_name
         ]);
         if (!$category) {
             return response()->json([
